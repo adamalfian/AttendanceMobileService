@@ -347,7 +347,8 @@ public class CameradActivity extends AppCompatActivity {
         new SweetAlertDialog(this)
                 .setTitleText("Hint:")
                 .setContentText(hint[hintNumber])
-                .show();
+//                .show()
+;
     }
 
     protected void showLoadingDialog() {

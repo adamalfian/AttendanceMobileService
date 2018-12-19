@@ -29,7 +29,7 @@
         android:layout_gravity="center_horizontal"
         android:textStyle="bold"
         android:textAlignment="center"
-        android:text="1. Normal tegak lurus kamera."/>
+        />
 
     <Button
         android:id="@+id/btn_capture"

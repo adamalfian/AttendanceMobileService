@@ -1,9 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".PredictTtdActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <com.williamww.silkysignature.views.SignaturePad
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/signature_pad"
+        android:layout_width="240dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="240dp"
+        app:penColor="@android:color/black"
+        android:paddingTop="100dp"
+        />
+
+    <EditText
+        android:id="@+id/nrp_predict_ttd"
+        android:layout_width="240dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:hint="NRP"/>
+
+    <EditText
+        android:id="@+id/passwrd_predict_ttd"
+        android:inputType="textPassword"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/nrp"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:hint="Password"/>
+
+    <LinearLayout
+        android:layout_width="240dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_weight="2">
+
+        <Button
+            android:id="@+id/btn_sendttd"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Send"
+            />
+        <Button
+            android:id="@+id/btn_clearTtd"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Clear"
+            />
+    </LinearLayout>
+
+</LinearLayout>
