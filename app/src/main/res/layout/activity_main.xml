@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="32dp"
+    android:paddingRight="32dp"
+    tools:context="com.example.irfan.squarecamera.MainActivity"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:paddingTop="50dp"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/btnMenuDataset"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ambil Foto Data Set"
+            android:textAllCaps="false"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/hintmain"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnTrain"
+            android:text="Train"
+            android:textAllCaps="false"/>
+
+        <Button
+            android:id="@+id/btnMenuPredict"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Predict"
+            android:textAllCaps="false"/>
+        <Button
+            android:id="@+id/btnRecycleView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RecycleView"
+            android:textAllCaps="false"/>
+
+        <Button
+            android:id="@+id/btnScan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Scan QR Code"
+            android:textAllCaps="false"/>
+
+        <Button
+            android:id="@+id/btnSignIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sign In Class"
+            android:textAllCaps="false"/>
+
+        <Button
+            android:id="@+id/datasetTtd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ambil Tanda Tangan"
+            android:textAllCaps="false"/>
+    </LinearLayout>
+
+
+</ScrollView>
