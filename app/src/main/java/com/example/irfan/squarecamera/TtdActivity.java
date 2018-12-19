@@ -67,7 +67,7 @@ public class TtdActivity extends AppCompatActivity {
         mSignaturePad.setOnSignedListener(new SignaturePad.OnSignedListener() {
             @Override
             public void onStartSigning() {
-
+                Toast.makeText(TtdActivity.this, "OnStartSigning", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -94,7 +94,7 @@ public class TtdActivity extends AppCompatActivity {
         sendTtdButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bitmap signatureBitmap = mSignaturePad.getSignatureBitmap();
+                uploadFIle();
 
             }
         });
@@ -109,57 +109,12 @@ public class TtdActivity extends AppCompatActivity {
         newBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
         stream.close();
     }
-    protected File getOutputMediaFile(int type) {
-        //external storage
-//        File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
-//                Environment.DIRECTORY_PICTURES), BASE_DIR + nrp);
 
-        //internal storage
-        File folder= getFilesDir();
-        File mediaStorageDir = new File(folder, BASE_DIR);
-
-        if (! mediaStorageDir.exists()){
-            if (! mediaStorageDir.mkdirs()){
-                Log.d(TAG, "sikemas: failed to create directory");
-                return null;
-            }
-        }
-
-        File mediaFile;
-        if (type == MEDIA_TYPE_IMAGE){
-            String filepath = mediaStorageDir.getPath() + nrp + "_" + counter + ".png";
-            listPathFile.add(filepath);
-            mediaFile = new File(filepath);
-        } else {
-            return null;
-        }
-
-        return mediaFile;
-    }
-
-    protected boolean getEncodedImage() {
-        loadingDialog.setTitleText("Encoding images");
-
-        Bitmap image;
-        ByteArrayOutputStream baos;
-        byte[] byteArrayImage;
-        String image_base64;
-
-        for (String imagepath : listPathFile) {
-            image = BitmapFactory.decodeFile(imagepath);
-            baos = new ByteArrayOutputStream();
-            image.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object
-            byteArrayImage = baos.toByteArray();
-            image_base64 = Base64.encodeToString(byteArrayImage, Base64.DEFAULT);
-            encodedImagesList.add(image_base64);
-        }
-        return true;
-    }
 
     protected void uploadFIle() {
-        loadingDialog.setTitleText("Uploading images");
+//        loadingDialog.setTitleText("Uploading images");
         StringRequest stringRequest;
-        for (int i = 0; i < encodedImagesList.size(); i++) {
+        for (int i = 0; i < 1; i++) {
             final int index = i;
             stringRequest = new StringRequest(Request.Method.POST, UPLOAD_URL,
                     new Response.Listener<String>() {
@@ -185,13 +140,13 @@ public class TtdActivity extends AppCompatActivity {
                 @Override
                 protected Map<String, String> getParams() {
                     // Get encoded Image
-                    String image = encodedImagesList.get(index);
+//                    String image = encodedImagesList.get(index);
                     Map<String, String> params = new HashMap<>();
                     // Adding parameters
 
                     params.put("idUser", nrp );
                     params.put("password", password );
-                    params.put("image","data:/image/jpeg;base64," + image+".png");
+                    params.put("image","data:/image/jpeg;base64," + mSignaturePad.getSignatureBitmap());
 
                     //returning parameters
                     return params;
