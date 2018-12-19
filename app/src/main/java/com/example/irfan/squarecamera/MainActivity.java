@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     public int counterCount=0;
     protected static String TAG = MainActivity.class.getSimpleName();
-    protected Button btnCamerad, btnRecycleView, btnMenuPredict, btnScan, btnTrain, btnSignIn, btnTtd;
+    protected LinearLayout btnCamerad, btnRecycleView, btnMenuPredict, btnScan, btnTrain, btnSignIn, btnDatasetTtd, btnTrainTTd, btnPredictTtd, btnSignInTtd;
     TextView hint;
 
     private String hintPakaiKacamata[] = new String[]{
@@ -67,37 +68,50 @@ public class MainActivity extends AppCompatActivity {
 
         requestReadStoragePermission();
         requestWriteStoragePermission();
+
+        btnCamerad = findViewById(R.id.btnMenuDataset);
         hint=findViewById(R.id.hintmain);
-        btnRecycleView = findViewById(R.id.btnRecycleView);
-        btnMenuPredict = findViewById(R.id.btnMenuPredict);
-        btnScan = findViewById(R.id.btnScan);
-        btnTrain = findViewById(R.id.btnTrain);
-        btnSignIn = findViewById(R.id.btnSignIn);
-        btnTtd = findViewById(R.id.datasetTtd);
         hint.setText(hintPakaiKacamata[counterCount]);
-        btnCamerad = (Button) findViewById(R.id.btnMenuDataset);
+        btnTrain = findViewById(R.id.btnTrain);
+        btnMenuPredict = findViewById(R.id.btnMenuPredict);
+        btnRecycleView = findViewById(R.id.btnRecycleView);
+        btnScan = findViewById(R.id.btnScan);
+        btnSignIn = findViewById(R.id.btnSignIn);
+        btnDatasetTtd = findViewById(R.id.btndatasetTtd);
+        btnTrainTTd = findViewById(R.id.btnTrainTtd);
+        btnPredictTtd = findViewById(R.id.btnPredictTtd);
+        btnSignInTtd = findViewById(R.id.btnSignInTtd);
 
-        btnRecycleView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), RecycleView.class));
-            }
-        });
-
-        btnMenuPredict.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               Intent intent = new Intent(MainActivity.this, PredictActivity.class);
-               startActivity(intent);
-
-            }
-        });
         btnCamerad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, CameradActivity.class);
                 intent.putExtra("counterCount",counterCount);
                 startActivityForResult(intent,250);
+            }
+        });
+
+        btnTrain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, TrainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnMenuPredict.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, PredictActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+        btnRecycleView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), RecycleView.class));
             }
         });
 
@@ -111,14 +125,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnTrain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, TrainActivity.class);
-                startActivity(intent);
-            }
-        });
-
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -126,14 +132,37 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        btnTtd.setOnClickListener(new View.OnClickListener() {
+        
+        btnDatasetTtd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, TtdActivity.class);
                 startActivity(intent);
             }
         });
+
+        btnTrainTTd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), PredictTtdActivity.class));
+            }
+        });
+
+        btnPredictTtd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), PredictTtdActivity.class));
+            }
+        });
+
+        btnSignInTtd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), SignInTtdActivity.class));
+            }
+        });
+
+
     }
 
     public  void requestReadStoragePermission() {

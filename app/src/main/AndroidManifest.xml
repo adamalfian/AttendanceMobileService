@@ -36,7 +36,11 @@
         <activity android:name=".QrCode" />
         <activity android:name=".TrainActivity" />
         <activity android:name=".SignInActivity" />
-        <activity android:name=".TtdActivity"></activity>
+        <activity android:name=".TtdActivity" />
+        <activity android:name=".TrainTtdActivity" />
+        <activity android:name=".PredictTtdActivity" />
+        <activity android:name=".SignInTtdActivity" />
+        <activity android:name=".ContohActivity"></activity>
     </application>
 
 </manifest>

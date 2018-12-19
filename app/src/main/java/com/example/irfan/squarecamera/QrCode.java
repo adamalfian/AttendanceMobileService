@@ -10,12 +10,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
 import com.budiyev.android.codescanner.CodeScanner;
 import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
 import com.google.zxing.Result;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
@@ -28,6 +26,7 @@ public class QrCode extends AppCompatActivity implements LocationListener {
     private double classLat;
     Location location;
     private String className;
+    public String idAgenda;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -38,7 +37,7 @@ public class QrCode extends AppCompatActivity implements LocationListener {
         mCodeScanner = new CodeScanner(this, scannerView);
         mCodeScanner.setDecodeCallback(new DecodeCallback() {
             @Override
-            public void onDecoded(@NonNull final Result result) {
+            public void onDecoded(final com.google.zxing.Result result) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -56,19 +55,30 @@ public class QrCode extends AppCompatActivity implements LocationListener {
                             latitude = gpsTracker.getLatitude();
                             longitude = gpsTracker.getLongitude();
                             float[] results = new float[3];
+
+                            Location locationA = new Location("point A");
+                            locationA.setLatitude(latitude);
+                            locationA.setLongitude(longitude);
+                            Location locationB = new Location("point B");
+                            locationB.setLatitude(classLat);
+                            locationB.setLongitude(classLong);
+                            double jarak = locationA.distanceTo(locationB);
+
+                            Log.d("JARAK DARI KELAS : ", ""+jarak);
                             location.distanceBetween(latitude,longitude,classLat,classLong,results);
                             float distance = results[0];
                             Log.d("JARAK DARI KELAS : ", ""+distance);
-                            float maxDistance = (float) 10.00;
+                            float maxDistance = (float) 50.00f;
                             if(distance <= maxDistance){
                                 Toast.makeText(getApplicationContext(), "ANDA TERCATAT HADIR", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(QrCode.this, CameradActivity.class);
+                                finish();
                                 startActivity(intent);
                             }
                             else {
-                                //Toast.makeText(getApplicationContext(), "ANDA TIDAK TERCATAT HADIR", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(QrCode.this, SignInActivity.class);
-                                startActivity(intent);
+                                Toast.makeText(getApplicationContext(), "ANDA TIDAK TERCATAT HADIR", Toast.LENGTH_SHORT).show();
+//                                Intent intent = new Intent(QrCode.this, SignInActivity.class);
+//                                startActivity(intent);
                             }
 //                            if (latDistance <= 10 && longDistance <= 10) {
 //                                Toast.makeText(getApplicationContext(), "ANDA TERCATAT HADIR", Toast.LENGTH_LONG).show();
