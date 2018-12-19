@@ -19,24 +19,28 @@ public class TrainTtdActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_train_ttd);
-        trainingTtd();
+        trainingtTTD();
     }
 
-    protected void trainingTtd() {
+    protected void trainingtTTD() {
         StringRequest stringRequest;
-        for (int i =0; i<1; i++){
+        for (int i = 0; i<1; i++){
             stringRequest = new StringRequest(Request.Method.POST, "http://etc.if.its.ac.id/doTrain_TTD/",
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
+                            Toast.makeText(getApplicationContext(), "the response: " + response, Toast.LENGTH_LONG).show();
+                            Log.d("TRAIN TTD", "onResponse: " + response);
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Toast.makeText(getApplicationContext(), error.getMessage(),
+                                    Toast.LENGTH_LONG).show();
 
                         }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-
-                }
-            }) {
+                    }) {
                 @Override
                 protected Map<String, String> getParams() {
                     Map<String, String> params = new HashMap<>();
@@ -50,5 +54,6 @@ public class TrainTtdActivity extends AppCompatActivity {
             };
             VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
         }
+
     }
 }
