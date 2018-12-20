@@ -30,6 +30,8 @@
         android:id="@+id/btnTrainImageTtd"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
+        android:background="#6d9ce8"
+        android:textColor="#fff"
         android:text="Train Data Foto"
         android:textAllCaps="false"/>
 

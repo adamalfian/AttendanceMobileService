@@ -49,6 +49,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="Predict"
+        android:background="#6d9ce8"
+        android:textColor="#fff"
         android:textSize="20sp"/>
 
     <TextView
