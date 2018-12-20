@@ -21,6 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Mulai Ambil Foto"
+        android:background="#6d9ce8"
+        android:textColor="#fff"
         android:textAllCaps="false"/>
 
 </LinearLayout>
