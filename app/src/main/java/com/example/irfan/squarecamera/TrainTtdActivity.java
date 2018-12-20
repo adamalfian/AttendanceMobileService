@@ -53,6 +53,7 @@ public class TrainTtdActivity extends AppCompatActivity {
                         public void onResponse(String response) {
                             Toast.makeText(getApplicationContext(), "the response: " + response, Toast.LENGTH_LONG).show();
                             Log.d("TRAIN TTD", "onResponse: " + response);
+                            predictionResult = response;
                             showSuccessDialog();
                         }
                     },

@@ -28,7 +28,7 @@
 
     <Button
         android:id="@+id/btnTrainImageTtd"
-        android:layout_width="match_parent"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:text="Train Data Foto"
         android:textAllCaps="false"/>
