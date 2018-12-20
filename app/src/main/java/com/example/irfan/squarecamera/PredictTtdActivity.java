@@ -1,5 +1,6 @@
 package com.example.irfan.squarecamera;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,10 +32,10 @@ public class PredictTtdActivity extends AppCompatActivity {
     private Button mSaveButton;
     private Button mCompressButton;
     private Button mSendButton;
-    EditText nrp_predictTtd, passwrd_predictTtd;
+    private EditText nrp_predictTtd, passwrd_predictTtd;
     private String predictionResult = "none";
 
-    private static String TAG = CameradActivity.class.getSimpleName();
+    private static String TAG = PredictTtdActivity.class.getSimpleName();
 
     protected int counter = 0;
     private static String BASE_DIR = "camtest/";
@@ -164,6 +165,7 @@ public class PredictTtdActivity extends AppCompatActivity {
                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                     @Override
                     public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        setResult(Activity.RESULT_OK);
                         finish();
                     }
                 })

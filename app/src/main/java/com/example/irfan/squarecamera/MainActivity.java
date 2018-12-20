@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
         btnTrainTTd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), PredictTtdActivity.class));
+                startActivity(new Intent(getApplicationContext(), TrainTtdActivity.class));
             }
         });
 

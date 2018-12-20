@@ -48,7 +48,7 @@ public class TtdActivity extends AppCompatActivity {
     private static String TAG = TtdActivity.class.getSimpleName();
     protected int counter = 0;
     private ArrayList<String> encodedImagesList;
-    protected static String UPLOAD_URL = "http://etc.if.its.ac.id/signin_TTD/";
+    protected static String UPLOAD_URL = "http://etc.if.its.ac.id/sendSignature/";
     protected SweetAlertDialog loadingDialog, errorDialog, successDialog;
     private int requestCounter = 0;
     private boolean hasRequestFailed = false;
@@ -94,7 +94,12 @@ public class TtdActivity extends AppCompatActivity {
         sendTtdButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                long startTime = System.nanoTime();
                 uploadFIle();
+                long endTime = System.nanoTime();
+                long totalTime= endTime - startTime;
+                double time = totalTime/1000000000.0;
+                Toast.makeText(TtdActivity.this, "waktu upload: " + (float) time, Toast.LENGTH_LONG).show();
 
             }
         });
@@ -120,10 +125,13 @@ public class TtdActivity extends AppCompatActivity {
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
+                            Toast.makeText(getApplicationContext(), "the response : " + response, Toast.LENGTH_LONG).show();
+                            Log.d(TAG, "onResponse: "+response);
+                            mSignaturePad.clear();
                             requestCounter--;
 
                             if (requestCounter == 0 && !hasRequestFailed) {
-                                closeLoadingDialog();
+//                                closeLoadingDialog();
                                 showSuccessDialog();
                             }
                         }

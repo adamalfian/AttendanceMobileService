@@ -370,6 +370,8 @@ public class CameradActivity extends AppCompatActivity {
                     @Override
                     public void onClick(SweetAlertDialog sweetAlertDialog) {
                         finish();
+                        //closeLoadingDialog();
+                        //startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     }
                 })
                 .show();
