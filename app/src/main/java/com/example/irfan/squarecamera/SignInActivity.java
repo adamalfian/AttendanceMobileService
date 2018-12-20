@@ -72,6 +72,7 @@ public class SignInActivity extends AppCompatActivity {
     private boolean hasRequestFailed = false;
     Spinner spinner;
     EditText nrp_sign, passwrd_sign;
+    String result = "none";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -260,6 +261,7 @@ public class SignInActivity extends AppCompatActivity {
                         public void onResponse(String response) {
                             Toast.makeText(getApplicationContext(), "the response : " + response, Toast.LENGTH_LONG).show();
                             Log.d(TAG, "onResponse: " + response);
+                            result = response;
 //                            JSONObject obj = new JSONObject();
 //                            message = obj.optString("message");
 //                            probability = obj.optLong("probability");
@@ -272,11 +274,11 @@ public class SignInActivity extends AppCompatActivity {
 //                            }
                             requestCounter--;
                             if (requestCounter == 0 && !hasRequestFailed) {
-                                closeLoadingDialog();
-                                //showSuccessDialog();
-                                Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-                                finish();
-                                startActivity(intent);
+                                //closeLoadingDialog();
+                                showSuccessDialog();
+//                                Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+    //                            finish();
+  //                              startActivity(intent);
                             }
                         }
                     },
@@ -335,8 +337,8 @@ public class SignInActivity extends AppCompatActivity {
 
     protected void showSuccessDialog() {
         new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
-                .setTitleText("Success! Hasil Prediksi : " + validation + "\ndengan Probability : " + probability)
-                .setContentText("Images uploaded successfully")
+                .setTitleText("Your Picture Uploaded with Result :!")
+                .setContentText(result)
                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                     @Override
                     public void onClick(SweetAlertDialog sweetAlertDialog) {
