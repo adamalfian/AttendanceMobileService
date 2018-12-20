@@ -100,7 +100,6 @@ public class PredictTtdActivity extends AppCompatActivity {
                     ByteArrayOutputStream baos=new ByteArrayOutputStream();
                     byte[] byteArrayImage;
 
-
                     result.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object
                     byteArrayImage = baos.toByteArray();
                     image_base64 = Base64.encodeToString(byteArrayImage, Base64.DEFAULT);

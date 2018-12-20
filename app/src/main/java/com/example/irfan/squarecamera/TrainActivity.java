@@ -1,8 +1,12 @@
 package com.example.irfan.squarecamera;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -13,13 +17,31 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 public class TrainActivity extends AppCompatActivity {
 
+    private Button btnTrainImage;
+    private EditText nrp_train, passwrd_train;
+    private String predictionResult = "none";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_train);
-        training();
+
+        btnTrainImage = findViewById(R.id.btnTrainImage);
+        nrp_train = findViewById(R.id.et_nrp_train);
+        passwrd_train = findViewById(R.id.et_passwrd_train);
+
+        btnTrainImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (nrp_train.getText().toString().isEmpty() || passwrd_train.getText().toString().isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Isi User dan Password anda!", Toast.LENGTH_SHORT).show();
+                }
+                else training();
+            }
+        });
     }
 
     protected void training() {
@@ -31,6 +53,9 @@ public class TrainActivity extends AppCompatActivity {
                         public void onResponse(String response) {
                             Toast.makeText(getApplicationContext(), "the response: " + response, Toast.LENGTH_LONG).show();
                             Log.d("TRAIN", "onResponse: " + response);
+                            predictionResult = response;
+
+                            showSuccessDialog();
                         }
                     },
                     new Response.ErrorListener() {
@@ -46,14 +71,27 @@ public class TrainActivity extends AppCompatActivity {
                     Map<String, String> params = new HashMap<>();
 
                     // Adding parameters
-                    params.put("idUser", "5115100705");
-                    params.put("password", "admin123");
+                    params.put("idUser", nrp_train.getText().toString());
+                    params.put("password", passwrd_train.getText().toString());
                     //returning parameters
                     return params;
                 }
             };
             VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
         }
+    }
 
+    protected void showSuccessDialog() {
+        new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE)
+                .setTitleText("Success! Hasil Training")
+                .setContentText(predictionResult)
+                .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        setResult(Activity.RESULT_OK);
+                        finish();
+                    }
+                })
+                .show();
     }
 }

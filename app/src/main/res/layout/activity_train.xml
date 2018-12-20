@@ -1,9 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingLeft="32dp"
+    android:paddingRight="32dp"
+    android:orientation="vertical"
+    android:gravity="center"
     tools:context=".TrainActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <EditText
+        android:id="@+id/et_nrp_train"
+        android:layout_width="240dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:hint="NRP"/>
+
+    <EditText
+        android:id="@+id/et_passwrd_train"
+        android:inputType="textPassword"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@+id/nrp"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:hint="Password"/>
+
+    <Button
+        android:id="@+id/btnTrainImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Train Data Foto"
+        android:textAllCaps="false"/>
+
+</LinearLayout>
