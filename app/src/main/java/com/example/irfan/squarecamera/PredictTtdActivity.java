@@ -1,8 +1,10 @@
 package com.example.irfan.squarecamera;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +20,7 @@ import com.williamww.silkysignature.views.SignaturePad;
 import com.wonderkiln.camerakit.CameraKitEventListener;
 import com.wonderkiln.camerakit.CameraView;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -47,6 +50,7 @@ public class PredictTtdActivity extends AppCompatActivity {
     protected static String UPLOAD_URL = "http://etc.if.its.ac.id/doPredict_TTD/";
     private int requestCounter = 0;
     private boolean hasRequestFailed = false;
+    private String image_base64;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +95,18 @@ public class PredictTtdActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (nrp_predictTtd.getText().toString().isEmpty() || passwrd_predictTtd.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Isi User dan Password anda!", Toast.LENGTH_SHORT).show();
-                } else uploadFIle();
+                } else {
+                    Bitmap result = mSignaturePad.getSignatureBitmap();
+                    ByteArrayOutputStream baos=new ByteArrayOutputStream();
+                    byte[] byteArrayImage;
+
+
+                    result.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object
+                    byteArrayImage = baos.toByteArray();
+                    image_base64 = Base64.encodeToString(byteArrayImage, Base64.DEFAULT);
+                    uploadFIle();
+                    mSignaturePad.clear();
+                }
             }
         });
     }
@@ -135,7 +150,7 @@ public class PredictTtdActivity extends AppCompatActivity {
 
                     params.put("idUser", nrp_predictTtd.getText().toString() );
                     params.put("password", passwrd_predictTtd.getText().toString() );
-                    params.put("image","data:/image/jpeg;base64," + mSignaturePad.getSignatureBitmap());
+                    params.put("image","data:/image/jpeg;base64," + image_base64);
 
                     //returning parameters
                     return params;

@@ -52,6 +52,7 @@ public class TtdActivity extends AppCompatActivity {
     protected SweetAlertDialog loadingDialog, errorDialog, successDialog;
     private int requestCounter = 0;
     private boolean hasRequestFailed = false;
+    private String image_base64;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,10 +96,19 @@ public class TtdActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 long startTime = System.nanoTime();
+                Bitmap result = mSignaturePad.getSignatureBitmap();
+                ByteArrayOutputStream baos=new ByteArrayOutputStream();
+                byte[] byteArrayImage;
+
+
+                result.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object
+                byteArrayImage = baos.toByteArray();
+                image_base64 = Base64.encodeToString(byteArrayImage, Base64.DEFAULT);
                 uploadFIle();
                 long endTime = System.nanoTime();
                 long totalTime= endTime - startTime;
                 double time = totalTime/1000000000.0;
+                mSignaturePad.clear();
                 Toast.makeText(TtdActivity.this, "waktu upload: " + (float) time, Toast.LENGTH_LONG).show();
 
             }
@@ -154,7 +164,7 @@ public class TtdActivity extends AppCompatActivity {
 
                     params.put("idUser", nrp );
                     params.put("password", password );
-                    params.put("image","data:/image/jpeg;base64," + mSignaturePad.getSignatureBitmap());
+                    params.put("image","data:/image/jpeg;base64," +image_base64);
 
                     //returning parameters
                     return params;

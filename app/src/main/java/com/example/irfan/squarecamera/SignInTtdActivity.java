@@ -1,8 +1,10 @@
 package com.example.irfan.squarecamera;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.williamww.silkysignature.views.SignaturePad;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,6 +40,7 @@ public class SignInTtdActivity extends AppCompatActivity {
     protected static String UPLOAD_URL = "http://etc.if.its.ac.id/signin_TTD/";
     private int requestCounter = 0;
     private boolean hasRequestFailed = false;
+    private String image_base64;
 
     private SignaturePad mSignaturePad;
     private Button mClearButton;
@@ -93,7 +97,17 @@ public class SignInTtdActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if (nrp_signTtd.getText().toString().isEmpty() || passwrd_signTtd.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Isi User dan Password anda!", Toast.LENGTH_SHORT).show();
-                } else uploadFIle();
+                } else
+                {
+                    Bitmap result = mSignaturePad.getSignatureBitmap();
+                    ByteArrayOutputStream baos=new ByteArrayOutputStream();
+                    byte[] byteArrayImage;
+
+                    result.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object
+                    byteArrayImage = baos.toByteArray();
+                    image_base64 = Base64.encodeToString(byteArrayImage, Base64.DEFAULT);
+                    uploadFIle();
+                }
             }
         });
     }
@@ -166,7 +180,7 @@ public class SignInTtdActivity extends AppCompatActivity {
 
                     params.put("idUser", nrp_signTtd.getText().toString());
                     params.put("password", passwrd_signTtd.getText().toString());
-                    params.put("image", "data:/image/jpeg;base64," + mSignaturePad.getSignatureBitmap());
+                    params.put("image", "data:/image/jpeg;base64," + image_base64);
                     params.put("Lat", String.valueOf(latitude));
                     params.put("Lon", String.valueOf(longitude));
                     idAgenda = spinner.getSelectedItem().toString();
