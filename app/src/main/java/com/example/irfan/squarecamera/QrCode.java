@@ -68,7 +68,7 @@ public class QrCode extends AppCompatActivity implements LocationListener {
                             location.distanceBetween(latitude,longitude,classLat,classLong,results);
                             float distance = results[0];
                             Log.d("JARAK DARI KELAS : ", ""+distance);
-                            float maxDistance = (float) 50.00f;
+                            float maxDistance = (float) 100.00f;
                             if(distance <= maxDistance){
                                 Toast.makeText(getApplicationContext(), "ANDA TERCATAT HADIR", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(QrCode.this, CameradActivity.class);
