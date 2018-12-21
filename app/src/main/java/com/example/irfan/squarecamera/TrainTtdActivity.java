@@ -39,12 +39,12 @@ public class TrainTtdActivity extends AppCompatActivity {
                 if (nrp_train.getText().toString().isEmpty() || passwrd_train.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Isi User dan Password anda!", Toast.LENGTH_SHORT).show();
                 }
-                else trainingtTTD();
+                else trainingTTD();
             }
         });
     }
 
-    protected void trainingtTTD() {
+    protected void trainingTTD() {
         StringRequest stringRequest;
         for (int i = 0; i<1; i++){
             stringRequest = new StringRequest(Request.Method.POST, "http://etc.if.its.ac.id/doTrain_TTD/",
