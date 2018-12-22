@@ -71,7 +71,7 @@ public class QrCode extends AppCompatActivity implements LocationListener {
                             float maxDistance = (float) 100.00f;
                             if(distance <= maxDistance){
                                 Toast.makeText(getApplicationContext(), "ANDA TERCATAT HADIR", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(QrCode.this, CameradActivity.class);
+                                Intent intent = new Intent(QrCode.this, SignInActivity.class);
                                 finish();
                                 startActivity(intent);
                             }

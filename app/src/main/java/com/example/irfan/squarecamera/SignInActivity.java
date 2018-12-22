@@ -343,7 +343,7 @@ public class SignInActivity extends AppCompatActivity {
                     @Override
                     public void onClick(SweetAlertDialog sweetAlertDialog) {
                         setResult(Activity.RESULT_OK);
-                        finish();
+                        startActivity(new Intent(getApplicationContext(), SignInTtdActivity.class));
                     }
                 })
                 .show();
